@@ -181,8 +181,9 @@ impl<'a> Request<'a> {
                 se.filesystem.setattr(self, self.header.nodeid, mode, uid, gid, size, atime, mtime, fh, crtime, chgtime, bkuptime, flags, self.reply());
             },
             FUSE_READLINK => {
+                let link = data.fetch_str();
                 debug!("READLINK({}) ino {:#018x}", self.header.unique, self.header.nodeid);
-                se.filesystem.readlink(self, self.header.nodeid, self.reply());
+                se.filesystem.readlink(self, self.header.nodeid, &link, self.reply());
             },
             FUSE_MKNOD => {
                 let arg: &fuse_mknod_in = data.fetch();

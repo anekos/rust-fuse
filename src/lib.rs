@@ -133,7 +133,7 @@ pub trait Filesystem {
     }
 
     /// Read symbolic link.
-    fn readlink (&mut self, _req: &Request, _ino: u64, reply: ReplyData) {
+    fn readlink (&mut self, _req: &Request, _ino: u64, _link: &OsStr, reply: ReplyData) {
         reply.error(ENOSYS);
     }
 
